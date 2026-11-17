@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start backend",
+			"type": "shell",
+			"command": "cmd /c \"cd /d \"C:/Users/ASUS/OneDrive/Documents/COLLEGE MANAGEMENT SYSTEM/backend\" && \"C:/Users/ASUS/AppData/Local/Programs/Python/Python312/python.exe\" run.py\"",
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

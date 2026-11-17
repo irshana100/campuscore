@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: college_management
+      MYSQL_USER: college_user
+      MYSQL_PASSWORD: college_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    environment:
+      FLASK_ENV: development
+      DATABASE_URL: mysql+pymysql://college_user:college_pass@db:3306/college_management
+      SECRET_KEY: dev-secret-key
+      FRONTEND_URL: http://localhost:5173
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    environment:
+      VITE_API_URL: http://localhost:5000
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
